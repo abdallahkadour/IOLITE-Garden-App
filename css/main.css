@@ -1,0 +1,87 @@
+
+  html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+  .main {
+    height: 100%;
+  }
+
+  #header{
+      margin: 0;
+      padding: 0;
+      height:10%;
+      margin-bottom: -16px;
+      text-align: center;
+      background-color: #333;
+  }
+
+  .imageContainer {
+      float:left;
+  }
+
+  #sprinkler {
+    clear:both;
+  }
+  #plants { 
+    clear: both;
+  }
+  #grid {
+    margin-top: 10px;
+    display: block;
+    width: 80%;
+    height: 91%;
+    float: left;
+    
+  }
+  #tools {
+    margin-top: 10px;
+    display: block;
+    width: 19%;
+    height: 91%;
+    float: right;
+    margin: 0;
+    padding: 0;
+    border-left: 6px solid;
+    z-index: -1;
+  }
+    
+  .lvl-over {
+    /* applied to a drop target when a draggable object is over it */
+    border: 2px dashed black !important;
+    }
+
+   .lvl-target {
+        /* applied to all drop targets when a drag operation begins, used to indicate drop targets on a page */
+        opacity: .6;
+    }     
+    [draggable] {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* Required to make elements draggable in old WebKit */
+        -khtml-user-drag: element;
+        -webkit-user-drag: element;
+        cursor: move;
+      }
+      
+    h2{
+      text-align: center;
+      color: white;
+    }
+    p {
+      margin-left: 60px;
+      border-bottom: 1px solid;
+      width: 120px;
+      font-size: 3em;
+      color: blue;
+    }
+
+    p.sprinkler{
+      width: 166px;
+    }
+
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>IOLITE-App</title>
+      <script src="js/angular.js"></script>
+      <script src="js/lvl-uuid.js"></script>
+      <script src="js/lvl-drag-drop.js"></script>
+      <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <link rel="stylesheet" type="text/css" href="css/navigation.css">
+      <link rel="stylesheet" type="text/css" href="css/footer.css">
+      <link rel="stylesheet" type="text/css" href="css/social.css">
+      <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+   </head>
+   <body ng-app="ddApp">
+      <div id="navwrapper">
+         <ul class="navigation">
+            <li><a class="navigation active" href="#Grid">Grid</a></li>
+            <li><a class="navigation" href="#contact">Contact</a></li>
+            <li><a class="navigation" href="#about">About</a></li>
+         </ul>
+      </div>
+      <div id="secondnav"><span ><a class="io" href="#iolite">IOLITE-Garden-App</a></span></div>
+      <div ng-controller="ddController" class="main">
+         <div id="grid" style="margin= 0 padding = 0">
+            <div ng-repeat="r in [1, 2, 3, 4, 5, 6, 7]">
+               <img  margin= 0 padding = 0 border= 0 height= 90px width= 10% src="images/capture.png" alt="" ng-repeat="c in [1, 2, 3, 4, 5,6,7,8,9, 10]" x-lvl-draggable='true' x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
+            </div>
+         </div>
+         <div id="tools">
+            <div id="sprinkler">
+               <p class="sprinkler">Sprinkler</p>
+               <div class="imageContainer"><img src="images/logo1.svg" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/logo2.svg" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/logo3.png" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/logo4.png" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+            </div>
+            <div id="plants">
+               <p>Plants</p>
+               <div class="imageContainer"><img src="images/plants1.jpg" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/plants2.PNG" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/plants3.png" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+               <div class="imageContainer"><img src="images/plants4.png" width="80" height="80"  x-lvl-draggable="true" alt="Kiwi standing on oval"></div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         <div id="foot">
+            <div class="social">
+               <h3 id="stayconnected">Stay connected</h3>
+               <ul class="socialback">
+                  <li><a class="sociallink" href="http://facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="sociallink"  href="http://linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a class="sociallink"  href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                  <li><a class="sociallink"  href="http://plus.google.com/"><i class="fa fa-google-plus"></i> </a></li>
+               </ul>
+            </div>
+            <div class="contact">
+               <h3>Contact Us</h3>
+               <form class="contact" name="form" method="post">
+                  <label for="name" >Name
+                  </label><br>
+                  <input class="text" type="text" name="name">
+                  <br></br>
+                  <label for="email" >Email
+                  </label><br>
+                  <input class="text" type="text" name="email">
+                  <br><br>
+                  <label for="message" >Message
+                  </label><br>
+                  <textarea class="message" name="message"></textarea>
+                  <br><br>
+                  <input type="submit" name="submit" class="submit" value="Submit">
+               </form>
+            </div>
+         </div>
+      </footer>
+   </body>
+   <script>
+      angular
+      	.module('ddApp', ['lvl.directives.dragdrop']) // register the directive with your app module
+      	.controller('ddController', ['$scope' , function($scope){
+      		$scope.dropped = function(dragEl, dropEl) { // function referenced by the drop target
+      
+      		//This is the application logic
+      			//The directive provides a native dom object, wrap with jqlite
+      			var drop = angular.element(dropEl);
+      			var drag = angular.element(dragEl);
+      	
+      			//Clear the previously applied element, if it exists
+      			var imageSrc = drop.attr('src');
+      			if (imageSrc) {
+      				drop.removeAttr(imageSrc);
+      			}
+      
+      			//Add the dragged image src
+      			imageSrc = drag.attr('src');
+      			drop.attr('src', imageSrc);
+      			drop.attr('border', 'none');
+      			drop.css('width', '10%');
+      			drop.css('height', '90px');
+      			
+      			//If the element has been dragged from the grid, clear dragged image
+      			if (drag.attr("x-lvl-drop-target")) {
+      				drag.attr('src', "images/capture.png");
+      				drag.css('width', '10%');
+      				drag.css('height', '90px');
+      			}
+      			// Make the element stable to enable onClick function
+      
+      			// if(drop.attr('user-drag')=='none'){
+      			// 	return;
+      			// }
+      			// drop.removeAttr('x-lvl-draggable');
+      			// drop.removeAttr('x-lvl-drop-target');
+      			// drop.removeAttr('dropped');
+      			// drop.removeAttr('draggable');
+      			// drop.removeAttr('x-on-drop');
+      			// drop.attr('user-select', 'none');
+      			// drop.attr('user-drag', 'none');
+      			
+        				
+        				//var btnhtml = drop;
+      			// var temp = $compile(btnhtml)($scope);
+      			// angular.element(document.getElementById('foo')).append(temp);
+      				
+      			 
+      			// drop.attr('user-select', 'none');
+      			// drop.attr('-moz-user-select', 'none');
+      			// drop.attr('-webkit-user-drag', 'none');
+      			// drop.attr('-webkit-user-select', 'none');
+      			// drop.attr('-ms-user-select', 'none');
+      			
+      
+      			//drop.attr('x-lvl-draggable','false');
+      			//drop.attr('x-lvl-drop-target','false')
+      			//drop.attr('ng-click','clickme()');
+      			
+      			//If an element has been dragged from the grid, clear dragged image
+      			//add the dragged color
+      
+      			//If the element has been dragged from the grid, clear dragged image
+      			if (drag.attr("x-lvl-drop-target")) {
+      				drag.attr('src', "images/capture.png");
+      				drag.css('width', '10%');
+      				drag.css('height', '90px');
+      			}
+      		}
+      	}]);
+   </script>
+   <!--<p>
+      Copyright &copy; 01.05.2015 Abdallah Kadour</br>
+      </p>Connect with us:
+       -->		
+</html>

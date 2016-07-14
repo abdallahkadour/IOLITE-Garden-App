@@ -1,0 +1,63 @@
+ul.navigation {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 15px;
+    z-index: 9;
+}
+
+li.navigation {
+    float: left;
+}
+
+li a.navigation {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a.iolite {
+    display: block;
+    color: white;
+    text-align: center; 
+    text-decoration: none;
+    font-size: 3em;
+}
+
+li a.navigation:hover:not(.active) {
+    background-color: #111;
+}
+.active {
+    background-color: #428bca;
+}
+#navwrapper {
+    float: left;
+    display: block;
+    padding: 0;
+    background-color: #242729;
+    
+    width: 35%;
+    height: 50px;
+}
+.io {
+  display: inline-block;
+  font-size: 3.4em;
+  margin-top: -10px;
+  text-align: center;
+  text-decoration: none !important;
+}
+#secondnav{
+    display: block;
+    float: left;
+    padding: 0;
+    background-color: #242729;
+    width: 65%;
+    height: 50px;
+}
+#nav{
+    position: fixed;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
